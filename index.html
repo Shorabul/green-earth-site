@@ -26,29 +26,23 @@
 
     <!-- stylesheet -->
     <link rel="stylesheet" href="./style/style.css">
+
+    <!-- custom CSS tailwind -->
+    <style type="text/tailwindcss">
+        @theme {
+        
+      }
+    </style>
 </head>
 
 <body class="bg-[#F0FDF4]">
 
     <!-- navbar -->
-    <header class="bg-[#15803D]">
+    <header class="bg-[#15803D] mx-auto lg:sticky lg:left-0 lg:top-0">
         <nav class="navbar w-11/12 mx-auto">
             <div class="navbar-start">
-                <div class="dropdown">
-                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
-                    </div>
-                    <ul tabindex="0"
-                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><a>About</a></li>
-                        <li><a>Gallery</a></li>
-                        <li><a>Plant a Tree</a></li>
-                    </ul>
-                </div>
+
+                <img class="w-12" src="./assets/tree.png" alt="">
                 <a class="text-xl font-bold text-white border-none">Green Earth</a>
             </div>
             <div class="navbar-center hidden lg:flex">
@@ -63,6 +57,23 @@
                     class="btn bg-[#FACC15] hover:bg-[#eab308] text-[#15803D] text-sm md:text-base font-medium border-none rounded-[999px] shadow-none">Plant
                     a
                     Tree</a>
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white " fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </div>
+                    <ul tabindex="0"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-[110px] p-2 shadow -left-8">
+                        <li><a>About</a></li>
+                        <li><a>Gallery</a></li>
+                        <li><a>Plant a Tree</a></li>
+                    </ul>
+                </div>
+
+
             </div>
         </nav>
     </header>
@@ -112,13 +123,16 @@
             </aside>
 
             <!-- card -->
-            <div class="col-span-full md:col-span-8 ">
+            <div class="col-span-full md:col-span-8 flex flex-col justify-start items-center">
+                <span id="loading-id" class="loading loading-dots loading-xl"></span>
                 <div id="categories-plants-container"
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] text-[10px] md:text-xs lg:text-sm">
+
+
                 </div>
             </div>
 
-            <!-- your xart -->
+            <!-- your cart -->
             <aside class="col-span-full md:col-span-4 lg:col-span-2 bg-white px-4 py-4 space-y-2 rounded-2xl">
                 <h3 class="font-semibold text-base md:text-lg lg:text-xl">Your Cart</h3>
                 <div id="cart-container" class="space-y-2 text-xs md:text-sm lg:text-base">
@@ -184,17 +198,17 @@
             <div
                 class="flex justify-center items-center flex-wrap lg:flex-nowrap gap-[50px] text-[#1F293780] text-xs md:text-sm lg:text-base">
                 <div
-                    class="bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3">
+                    class="bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3 shadow-card">
                     <p class="text-[#15803D] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">500K+</p>
                     <p>Trees Planted</p>
                 </div>
                 <div
-                    class=" bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3">
+                    class=" bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3 shadow-card">
                     <p class="text-[#15803D] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">120+</p>
                     <p>Communities Involved</p>
                 </div>
                 <div
-                    class="bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3">
+                    class="bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3 shadow-card">
                     <p class="text-[#15803D] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">30+</p>
                     <p>Countries Reached</p>
                 </div>
@@ -208,7 +222,7 @@
             <h1 class="text-white font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">Plant a Tree Today
             </h1>
             <form
-                class="bg-[#15803D] text-[#1F293750] text-xs md:text-sm lg:text-base rounded-xl w-[300px] md:w-[450px] lg:w-[650px] p-10 flex flex-col gap-[10px]"
+                class="bg-[#15803D] text-[#1F293750] text-xs md:text-sm lg:text-base rounded-xl w-[300px] md:w-[450px] lg:w-[650px] p-10 flex flex-col gap-[10px] shadow-lg hover:shadow-xl"
                 action="">
                 <input class="bg-white p-3 rounded-md" type="text" id="fullname" name="fullname"
                     placeholder="Your Name">

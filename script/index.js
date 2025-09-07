@@ -1,59 +1,3 @@
-document.getElementById('cart-container')
-    .addEventListener('click', (e) => {
-        if (e.target.className.includes('delete')) {
-            const totalPrice = document.getElementById('total-price').innerText;
-            let total = Number(totalPrice) - Number(e.target.parentNode.parentNode.children[0].children[1].children[0].innerText);
-            document.getElementById('total-price').innerText = total;
-            e.target.parentNode.parentNode.remove();
-        }
-    });
-
-
-const removeActive = () => {
-    const categorieNodeList = document.querySelectorAll('.categorie');
-    categorieNodeList.forEach(node => {
-        node.classList.remove('active');
-    });
-}
-
-
-const loadTreesDetail = (id) => {
-    const url = `https://openapi.programming-hero.com/api/plant/${id}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(jsonData => displayTreesDetail(jsonData.plants));
-}
-const displayTreesDetail = (plant) => {
-    const treesDetailsContainer = document.getElementById('trees-details-container');
-    treesDetailsContainer.innerHTML = `
-        <h3 class="font-semibold">${plant.name}</h3>
-        <img class="object-cover h-[300px] w-full rounded-lg" src="${plant.image}" alt="">
-        <p class="text-[#1F293780]"><span class="text-[#1F2937] font-semibold">Category:</span>
-        ${plant.category}</p>
-        <p class="text-[#1F293780]"><span class="text-[#1F2937] font-semibold">Price:</span> ৳ <span>${plant.price}</span></p>
-        <p class="text-[#1F293780]"><span class="text-[#1F2937] font-semibold">Description:</span>
-        ${plant.description}</p>
-        `;
-    document.getElementById('tree_modal').showModal();
-}
-
-
-const displayAllTreesCategoryPlants = () => {
-    const url = `https://openapi.programming-hero.com/api/plants`;
-    fetch(url)
-        .then(res => res.json())
-        .then(jsonData => displayCategoryPlants(jsonData.plants));
-}
-document.getElementById('all-trees').addEventListener('click', (e) => {
-    removeActive();
-    e.target.classList.add('active');
-    const url = `https://openapi.programming-hero.com/api/plants`;
-    fetch(url)
-        .then(res => res.json())
-        .then(jsonData => displayCategoryPlants(jsonData.plants));
-});
-
-
 const addToCart = (name, price) => {
     alert(`${name} has been added to the cart.`);
     const cartContainer = document.getElementById('cart-container');
@@ -74,7 +18,80 @@ const addToCart = (name, price) => {
 }
 
 
+
+document.getElementById('cart-container').addEventListener('click', (e) => {
+    if (e.target.className.includes('delete')) {
+        const totalPrice = document.getElementById('total-price').innerText;
+        let total = Number(totalPrice) - Number(e.target.parentNode.parentNode.children[0].children[1].children[0].innerText);
+        document.getElementById('total-price').innerText = total;
+        e.target.parentNode.parentNode.remove();
+    }
+});
+
+
+
+const loading = (status) => {
+    if (status) {
+        document.getElementById('categories-plants-container').classList.add('hidden');
+        document.getElementById('loading-id').classList.remove('hidden');
+    }
+    else {
+        document.getElementById('loading-id').classList.add('hidden');
+        document.getElementById('categories-plants-container').classList.remove('hidden');
+    }
+}
+
+
+
+const removeActive = () => {
+    const categorieNodeList = document.querySelectorAll('.categorie');
+    categorieNodeList.forEach(node => {
+        node.classList.remove('active');
+    });
+}
+
+
+
+const displayTreesDetail = (plant) => {
+    const treesDetailsContainer = document.getElementById('trees-details-container');
+    treesDetailsContainer.innerHTML = `
+        <h3 class="font-semibold">${plant.name}</h3>
+        <img class="object-cover h-[300px] w-full rounded-lg" src="${plant.image}" alt="">
+        <p class="text-[#1F293780]"><span class="text-[#1F2937] font-semibold">Category:</span>
+        ${plant.category}</p>
+        <p class="text-[#1F293780]"><span class="text-[#1F2937] font-semibold">Price:</span> ৳ <span>${plant.price}</span></p>
+        <p class="text-[#1F293780]"><span class="text-[#1F2937] font-semibold">Description:</span>
+        ${plant.description}</p>
+        `;
+    document.getElementById('tree_modal').showModal();
+}
+const loadTreesDetail = (id) => {
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(jsonData => displayTreesDetail(jsonData.plants));
+}
+
+
+const loadAllTreesCategoryPlants = () => {
+    const url = `https://openapi.programming-hero.com/api/plants`;
+    fetch(url)
+        .then(res => res.json())
+        .then(jsonData => displayCategoryPlants(jsonData.plants));
+}
+document.getElementById('all-trees').addEventListener('click', (e) => {
+    loading(true);
+    removeActive();
+    e.target.classList.add('active');
+    const url = `https://openapi.programming-hero.com/api/plants`;
+    fetch(url)
+        .then(res => res.json())
+        .then(jsonData => displayCategoryPlants(jsonData.plants));
+});
+
+
 const loadCategoryPlants = (id) => {
+    loading(true);
     removeActive();
     document.getElementById(`categorie-${id}`).classList.add('active');
     const url = `https://openapi.programming-hero.com/api/category/${id}`;
@@ -88,7 +105,7 @@ const displayCategoryPlants = (plants) => {
     plants.forEach(plant => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="p-4 space-y-2 bg-white rounded-lg h-full flex flex-col justify-between">
+        <div class="p-4 space-y-2 bg-white rounded-lg h-full flex flex-col justify-between shadow-card">
             <img class="object-cover h-[186.8px] w-full rounded-lg" src="${plant.image}" alt="">
             <div class="space-y-2">
                 <h5 onclick="loadTreesDetail(${plant.id})" class="font-semibold">${plant.name}</h5>
@@ -103,7 +120,9 @@ const displayCategoryPlants = (plants) => {
         `;
         categoriesPlantsContainer.append(div);
     });
+    loading(false);
 }
+
 
 
 const loadCategory = () => {
@@ -123,7 +142,5 @@ const displayCategoryName = (categories) => {
     });
 
 }
-
-
 loadCategory();
-displayAllTreesCategoryPlants();
+loadAllTreesCategoryPlants();
