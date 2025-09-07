@@ -29,6 +29,7 @@
 </head>
 
 <body class="bg-[#F0FDF4]">
+
     <!-- navbar -->
     <header class="bg-[#15803D]">
         <nav class="navbar w-11/12 mx-auto">
@@ -89,6 +90,59 @@
         </div>
     </section>
 
+    <!-- Choose Your Trees -->
+    <section class="w-11/12 mx-auto py-[40px] md:py-[70px] lg:py-[100px] space-y-[40px]">
+        <h1 class="text-[#1F2937] font-semibold text-center text-xl md:text-2xl lg:text-4xl">Choose Your Trees</h1>
+        <section class="w-full grid md:grid-cols-12 gap-[30px]">
+
+            <!-- left -->
+            <aside class="col-span-full md:col-span-ful lg:col-span-2 space-y-[26px]">
+                <h3 class="font-semibold text-base md:text-xl">Categories</h3>
+                <div id="categories-container"
+                    class="text-[#1F2937] space-y-1 flex flex-wrap lg:flex-col justify-center lg:justify-start lg:flex-none">
+                    <div>
+                        <p id="all-trees"
+                            class="categorie font-medium px-[10px] py-2 rounded hover:bg-[#15803D] hover:text-white ">
+                            All Trees
+                        </p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- middle -->
+            <div class="col-span-full md:col-span-8 ">
+                <div id="categories-plants-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
+                </div>
+            </div>
+
+            <!-- right -->
+            <aside class="col-span-full md:col-span-4 lg:col-span-2 bg-white px-4 py-4 space-y-2 rounded-2xl">
+                <h3 class="font-semibold text-base md:text-xl">Your Cart</h3>
+                <div id="cart-container" class="space-y-2">
+                </div>
+                <div class="flex justify-between items-center text-[#1F2937] border-t-2 border-[#1F29371A]">
+                    <h4 class="">Total:</h4>
+                    <p class="">৳ <span id="total-price">0</span></p>
+                </div>
+            </aside>
+
+        </section>
+    </section>
+
+    <!-- modal -->
+    <dialog id="tree_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <div id="trees-details-container" class="space-y-3">
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- js -->
     <script src="./script/index.js"></script>
 </body>
 
