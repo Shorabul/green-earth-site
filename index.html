@@ -39,7 +39,7 @@
 
     <!-- navbar -->
     <header class="bg-[#15803D] mx-auto lg:sticky lg:left-0 lg:top-0">
-        <nav class="navbar w-11/12 mx-auto">
+        <nav class="navbar md:w-11/12 mx-auto">
             <div class="navbar-start">
 
                 <img class="w-12" src="./assets/tree.png" alt="">
@@ -59,11 +59,12 @@
                     Tree</a>
                 <div class="dropdown">
                     <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white " fill="none"
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white " fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
+                        </svg> -->
+                        <i class="fa-solid fa-bars text-white text-lg"></i>
                     </div>
                     <ul tabindex="0"
                         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-[110px] p-2 shadow -left-8">
@@ -73,6 +74,25 @@
                     </ul>
                 </div>
 
+                <div class="dropdown relative md:hidden">
+                    <p
+                        class=" absolute left-8 top-1 h-2 w-2 bg-red-500 rounded-full text-white font-bold text-[5px] flex justify-center items-center">
+                        <span id="total-product">0</span>
+                    </p>
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden" onclick="toggleCart()">
+                        <i class="fa-solid fa-cart-shopping text-white text-lg"></i>
+                    </div>
+                    <div tabindex="0"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-[120px] p-2 shadow -left-16 text-xs">
+                        <h3 class="font-semibold">Your Cart</h3>
+                        <div id="" class="cart-container space-y-1 md:space-y-2 text-[10px]">
+                        </div>
+                        <div class="flex justify-between items-center text-[#1F2937]  border-t-2 border-[#1F29371A]">
+                            <h4 class="">Total:</h4>
+                            <p class="">৳ <span class="total-price">0</span></p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </nav>
@@ -104,7 +124,7 @@
 
     <!-- choose your trees -->
     <section class="w-11/12 mx-auto py-[40px] md:py-[70px] lg:py-[100px] space-y-[40px]">
-        <h1 class="text-[#1F2937] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">Choose
+        <h1 class="text-[#1F2937] font-semibold text-center text-sm md:text-2xl lg:text-[32px]">Choose
             Your Trees</h1>
         <section class="w-full grid md:grid-cols-12 gap-[30px]">
 
@@ -112,7 +132,7 @@
             <aside class="col-span-full md:col-span-ful lg:col-span-2 space-y-[26px]">
                 <h3 class="font-semibold text-base md:text-lg lg:text-xl">Categories</h3>
                 <div id="categories-container"
-                    class="text-[#1F2937] space-y-1 flex flex-wrap lg:flex-col justify-center lg:justify-start lg:flex-none text-xs md:text-sm lg:text-base">
+                    class="text-[#1F2937] flex gap-1 flex-wrap lg:flex-col justify-center lg:justify-start lg:flex-none text-xs md:text-sm lg:text-base">
                     <div>
                         <p id="all-trees"
                             class="categorie font-medium px-[10px] py-2 rounded hover:bg-[#15803D] hover:text-white ">
@@ -123,24 +143,23 @@
             </aside>
 
             <!-- card -->
-            <div class="col-span-full md:col-span-8 flex flex-col justify-start items-center">
+            <div id="cart-section" class="col-span-full md:col-span-8 flex flex-col justify-start items-center">
                 <span id="loading-id" class="loading loading-dots loading-xl"></span>
                 <div id="categories-plants-container"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] text-[10px] md:text-xs lg:text-sm">
-
-
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px] md:gap-5 lg:gap-[30px] text-xs md:text-sm lg:text-base">
                 </div>
             </div>
 
             <!-- your cart -->
-            <aside class="col-span-full md:col-span-4 lg:col-span-2 bg-white px-4 py-4 space-y-2 rounded-2xl">
+            <aside
+                class="col-span-full md:col-span-4 lg:col-span-2 bg-white px-4 py-4 space-y-2 rounded-2xl hidden md:block">
                 <h3 class="font-semibold text-base md:text-lg lg:text-xl">Your Cart</h3>
-                <div id="cart-container" class="space-y-2 text-xs md:text-sm lg:text-base">
+                <div id="" class="cart-container space-y-2 text-xs md:text-sm lg:text-base">
                 </div>
                 <div
                     class="flex justify-between items-center text-[#1F2937] text-xs md:text-sm lg:text-base border-t-2 border-[#1F29371A]">
                     <h4 class="">Total:</h4>
-                    <p class="">৳ <span id="total-price">0</span></p>
+                    <p class="">৳ <span class="total-price">0</span></p>
                 </div>
             </aside>
 
@@ -162,7 +181,7 @@
 
     <!-- about the campaign -->
     <section class="w-11/12 mx-auto space-y-10">
-        <h1 class="text-[#1F2937] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">
+        <h1 class="text-[#1F2937] font-semibold text-center text-sm md:text-2xl lg:text-[32px]">
             About the Campaign
         </h1>
         <div class="grid grid-cols-12 w-full mx-auto">
@@ -192,50 +211,50 @@
     </section>
 
     <!-- our impact -->
-    <section class="bg-[#CFF0DC] mt-[100px] py-[100px]">
-        <div class="w-11/12 mx-auto space-y-10">
-            <h1 class="text-[#1F2937] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">Our Impact</h1>
+    <section class="bg-[#CFF0DC] mt-[50px] md:mt-[100px] py-[50px] md:py-[100px]">
+        <div class="w-11/12 mx-auto space-y-5 md:space-y-10">
+            <h1 class="text-[#1F2937] font-semibold text-center text-sm md:text-2xl lg:text-[32px]">Our Impact</h1>
             <div
-                class="flex justify-center items-center flex-wrap lg:flex-nowrap gap-[50px] text-[#1F293780] text-xs md:text-sm lg:text-base">
+                class="flex justify-center items-center flex-wrap lg:flex-nowrap gap-[25px] md:gap-[50px] text-[#1F293780] text-xs md:text-sm lg:text-base">
                 <div
                     class="bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3 shadow-card">
-                    <p class="text-[#15803D] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">500K+</p>
-                    <p>Trees Planted</p>
+                    <p class="text-[#15803D] font-semibold text-center text-sm md:text-[22px] lg:text-[32px]">500K+</p>
+                    <p class="text-xs md:text-sm lg:text-base">Trees Planted</p>
                 </div>
                 <div
                     class=" bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3 shadow-card">
-                    <p class="text-[#15803D] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">120+</p>
-                    <p>Communities Involved</p>
+                    <p class="text-[#15803D] font-semibold text-center text-sm md:text-[22px] lg:text-[32px]">120+</p>
+                    <p class="text-xs md:text-sm lg:text-base">Communities Involved</p>
                 </div>
                 <div
                     class="bg-white w-[280px] h-[120px] md:w-[400px] md:h-[140px] lg:w-[516.67px] lg:h-[156px] rounded-xl flex flex-col justify-center items-center space-y-3 shadow-card">
-                    <p class="text-[#15803D] font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">30+</p>
-                    <p>Countries Reached</p>
+                    <p class="text-[#15803D] font-semibold text-center text-sm md:text-[22px] lg:text-[32px]">30+</p>
+                    <p class="text-xs md:text-sm lg:text-base">Countries Reached</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- footer -->
-    <footer class="bg-[#166534] py-[100px]">
+    <footer class="bg-[#166534] py-[50px] md:py-[100px]">
         <div class="flex flex-col justify-center items-center gap-10">
-            <h1 class="text-white font-semibold text-center text-xs md:text-[22px] lg:text-[32px]">Plant a Tree Today
+            <h1 class="text-white font-semibold text-center text-sm md:text-2xl lg:text-[32px]">Plant a Tree Today
             </h1>
             <form
-                class="bg-[#15803D] text-[#1F293750] text-xs md:text-sm lg:text-base rounded-xl w-[300px] md:w-[450px] lg:w-[650px] p-10 flex flex-col gap-[10px] shadow-lg hover:shadow-xl"
+                class="bg-[#15803D] text-[#1F293750] text-xs md:text-sm lg:text-base rounded-xl w-[300px] md:w-[450px] lg:w-[650px] p-5 md:p-10 flex flex-col gap-2 md:gap-[10px] shadow-lg hover:shadow-xl"
                 action="">
-                <input class="bg-white p-3 rounded-md" type="text" id="fullname" name="fullname"
+                <input class="bg-white p-2 md:p-3 rounded-md" type="text" id="fullname" name="fullname"
                     placeholder="Your Name">
-                <input class="bg-white p-3 rounded-md" type="email" id="email" name="email"
+                <input class="bg-white p-2 md:p-3 rounded-md" type="email" id="email" name="email"
                     placeholder="Your Email Address">
-                <select class="bg-white p-3 text-[#1F2937] rounded-md border-none" name="" id="">
+                <select class="bg-white p-2 md:p-3 text-[#1F2937] rounded-md border-none" name="" id="">
                     <option class="bg-white" disabled selected>Number of Trees</option>
                     <option>1 Tree $5</option>
                     <option>5 Tree $25</option>
                     <option>10 Tree $50</option>
                 </select>
                 <input
-                    class="btn bg-[#FACC15] hover:bg-[#eab308] text-[#15803D] font-medium border-none rounded-[999px] shadow-none mt-[10px]"
+                    class="btn bg-[#FACC15] hover:bg-[#eab308] text-[#15803D] font-medium border-none rounded-[999px] shadow-none mt-2 md:mt-[10px]"
                     type="submit" value="Donate Now">
             </form>
         </div>

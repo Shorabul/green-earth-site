@@ -54,7 +54,7 @@
 
 #### 5) Explain template literals in ES6. How are they different from string concatenation?
 
-- Template literals make writing strings much easier and cleaner. Instead of using quotation marks and lots of ```+``` signs to enclose text and variables, use backticks ```(`)``` and put variables directly inside ```${...}``. Write multi-line strings without special characters.
+- Template literals make writing strings much easier and cleaner. Instead of using quotation marks and lots of ```+``` signs to enclose text and variables, use backticks ```(`)``` and put variables directly inside ```${...}```. Write multi-line strings without special characters.
 
 - String Concatenation
 ```const user = "Shorabul"; const age = 24; const message = `User ${user} is ${age} years old.`;```

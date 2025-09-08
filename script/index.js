@@ -1,32 +1,65 @@
+const totalProduct = document.getElementById('total-product');
+let uniqueId = 1;
 const addToCart = (name, price) => {
     alert(`${name} has been added to the cart.`);
-    const cartContainer = document.getElementById('cart-container');
-    cartContainer.innerHTML += `
-    <div class="bg-[#F0FDF4] flex justify-between items-center py-2 px-3 rounded-lg">
+    const cartContainers = document.querySelectorAll('.cart-container');
+    cartContainers.forEach(cartContainer => {
+        cartContainer.innerHTML += `
+    <div class="cartItemId-${uniqueId} bg-[#F0FDF4] flex justify-between items-center py-1 md:py-2 md:px-3 rounded-lg">
         <div class="space-y-1">
             <h4 class="font-semibold">${name}</h4>
-            <p class="text-[#1F293750] text-base md:text-lg">৳ <span>${price}</span></p>
+            <p class="text-[#1F293750] text-xs md:text-base lg:text-lg">৳ <span>${price}</span></p>
         </div>
-        <div class="text-[#8C8C8C]">
-            <i class="fa-solid fa-xmark hover:text-red-500 delete"></i>
+        <div onclick="dele('cartItemId-${uniqueId}', ${price})" class="text-[#8C8C8C]">
+            <i class="fa-solid fa-xmark hover:text-red-500"></i>
         </div>
     </div>
     `;
-    const totalPrice = document.getElementById('total-price').innerText;
-    let total = Number(totalPrice) + Number(price);
-    document.getElementById('total-price').innerText = total;
+    });
+    // cartContainer[0].innerHTML += `
+    // <div class="cartItemId-${uniqueId} bg-[#F0FDF4] flex justify-between items-center py-2 px-3 rounded-lg">
+    //     <div class="space-y-1">
+    //         <h4 class="font-semibold">${name}</h4>
+    //         <p class="text-[#1F293750] text-base md:text-lg">৳ <span>${price}</span></p>
+    //     </div>
+    //     <div onclick="dele('cartItemId-${uniqueId}', ${price})" class="text-[#8C8C8C]">
+    //         <i class="fa-solid fa-xmark hover:text-red-500"></i>
+    //     </div>
+    // </div>
+    // `;
+    // cartContainer[1].innerHTML += `
+    // <div class="cartItemId-${uniqueId} bg-[#F0FDF4] flex justify-between items-center py-2 px-3 rounded-lg">
+    //     <div class="space-y-1">
+    //         <h4 class="font-semibold">${name}</h4>
+    //         <p class="text-[#1F293750] text-base md:text-lg">৳ <span>${price}</span></p>
+    //     </div>
+    //     <div onclick="dele('cartItemId-${uniqueId}', ${price})" class="text-[#8C8C8C]">
+    //         <i class="fa-solid fa-xmark hover:text-red-500"></i>
+    //     </div>
+    // </div>
+    // `;
+    const totalPrice = document.querySelectorAll('.total-price');
+    let total = Number(totalPrice[0].innerText) + Number(price);
+    totalPrice[0].innerText = total;
+    total = Number(totalPrice[1].innerText) + Number(price);
+    totalPrice[1].innerText = total;
+    uniqueId++;
+    totalProduct.innerText = Number(totalProduct.innerText) + 1;
 }
+const dele = (itemId, itemPrice) => {
+    const idNodeList = document.querySelectorAll(`.${itemId}`);
 
-
-
-document.getElementById('cart-container').addEventListener('click', (e) => {
-    if (e.target.className.includes('delete')) {
-        const totalPrice = document.getElementById('total-price').innerText;
-        let total = Number(totalPrice) - Number(e.target.parentNode.parentNode.children[0].children[1].children[0].innerText);
-        document.getElementById('total-price').innerText = total;
-        e.target.parentNode.parentNode.remove();
-    }
-});
+    const totalPriceNodeList = document.querySelectorAll('.total-price');
+    totalPriceNodeList.forEach(p => {
+        // console.log(p.innerText);
+        let total = Number(p.innerText) - itemPrice;
+        p.innerText = total;
+    });
+    idNodeList.forEach((item) => {
+        item.remove();
+    });
+    totalProduct.innerText = Number(totalProduct.innerText) - 1;
+}
 
 
 
@@ -109,7 +142,7 @@ const displayCategoryPlants = (plants) => {
             <img class="object-cover h-[186.8px] w-full rounded-lg" src="${plant.image}" alt="">
             <div class="space-y-2">
                 <h5 onclick="loadTreesDetail(${plant.id})" class="font-semibold">${plant.name}</h5>
-                <p class="text-[#1F293780] text-[8px] md:text-[10px] lg:text-xs">${plant.description.split(' ').slice(0, 18).join(' ')}...</p>
+                <p class="text-[#1F293780] text-[10px] md:text-xs lg:text-sm">${plant.description.split(' ').slice(0, 18).join(' ')}...</p>
                 <div class="flex justify-between items-center">
                     <p class="bg-[#DCFCE7] text-[#15803D] py-1 px-3 rounded-[400px]">${plant.category}</p>
                     <p class="text-[#1F2937] font-semibold">৳ <span>${plant.price}</span></p>
